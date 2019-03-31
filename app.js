@@ -56,6 +56,23 @@ app.get('/greetings',(req,res)=>{
   res.send(greeting);
 })
 
+// Assignment part 
+
+app.get('/sum',(req,res)=>{
+  const a = Number(req.query.a)
+  const b = Number(req.query.b)  
+  if(!a){
+    return res.status(400).send('Please provide a number a')
+
+  }
+  if(!b){
+    return res.status(400).send('Please provide a number b')
+  }
+
+  const result = `The sum of ${a} and ${b} is ${a+b}`
+  res.send(result)
+})
+
 app.listen(8000, () => {
   console.log('Express server is listening on port 8000!');
  
