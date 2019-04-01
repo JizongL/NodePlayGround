@@ -73,6 +73,36 @@ app.get('/sum',(req,res)=>{
   res.send(result)
 })
 
+
+CaesarCipher=(text,shift)=>{
+  console.log(text)
+  
+  let upperCase = text.toUpperCase().split('')
+  
+  result = upperCase.map(char=>{
+    let processed =((char.charCodeAt(0)+Number(shift)-65)%26+65)
+    return String.fromCharCode(processed)
+  })
+  return result.join('')
+
+}
+
+app.get('/cipher',(req,res)=>{
+  const text = req.query.text
+  const shift = req.query.shift
+  if(!text){
+    return res.status(400).send('Please provide text for decipher')
+  }
+  if(!shift){
+    return res.status(400).send('Please provide shift key')
+  }
+  result = CaesarCipher(text,shift)
+  res.send(result)
+
+})
+
+
+
 app.listen(8000, () => {
   console.log('Express server is listening on port 8000!');
  
